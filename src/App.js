@@ -1,8 +1,17 @@
 import Form from "./components/Form/Form.js";
+import { useState } from "react";
 
 function App() {
-  function handleAddActivity(data) {
-    //console.log(data);
+  const [activities, setActivities] = useState([]);
+
+  function handleAddActivity(name, isWeatherChecked) {
+    setActivities([
+      {
+        name: name,
+        isForGoodWeather: isWeatherChecked,
+      },
+      ...activities,
+    ]);
   }
 
   return (
