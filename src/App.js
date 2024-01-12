@@ -9,6 +9,12 @@ function App() {
   const [activities, setActivities] = useLocalStorageState("activities", {
     defaultValue: [],
   });
+  //const isGoodWeather = false;
+  const [isGoodWeather, setIsGoodWeather] = useState(false);
+
+  function handleChangeFilter() {
+    setIsGoodWeather(!isGoodWeather);
+  }
 
   function handleAddActivity(name, isWeatherChecked) {
     setActivities([
@@ -21,11 +27,24 @@ function App() {
     ]);
   }
 
+  const filteredActivities = activities.filter(
+    (activity) => activity.isForGoodWeather === isGoodWeather && activity
+  );
+
   return (
     <div className="App">
+      <button type="button" onClick={handleChangeFilter}>
+        good/bad
+      </button>
       <Form onAddActivity={handleAddActivity} />
-      <List>
-        {activities.map((activity) => (
+      <List
+        title={
+          isGoodWeather
+            ? "The weather is awesome! You can do now:"
+            : "Bad weather outside! Here's what you can do now:"
+        }
+      >
+        {filteredActivities.map((activity) => (
           <ListItem key={activity.id} newItem={activity.name} />
         ))}
       </List>
