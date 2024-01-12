@@ -23,10 +23,6 @@ function App() {
     fetchWeather();
   }, []);
 
-  function handleChangeFilter() {
-    setWeather(!weather.isGoodWeather);
-  }
-
   function handleAddActivity(name, isWeatherChecked) {
     setActivities([
       {
@@ -37,6 +33,11 @@ function App() {
       ...activities,
     ]);
   }
+
+  function handleDeleteActivity(idToRemove) {
+    setActivities(activities.filter((activity) => activity.id !== idToRemove));
+  }
+
   if (!weather) {
     return null;
   }
@@ -47,9 +48,6 @@ function App() {
   );
   return (
     <div className="App">
-      <button type="button" onClick={handleChangeFilter}>
-        good/bad
-      </button>
       <Header temperature={weather.temperature} condition={weather.condition} />
       <Form onAddActivity={handleAddActivity} />
       <List
@@ -60,7 +58,12 @@ function App() {
         }
       >
         {filteredActivities.map((activity) => (
-          <ListItem key={activity.id} newItem={activity.name} />
+          <ListItem
+            id={activity.id}
+            key={activity.id}
+            newItem={activity.name}
+            onDeleteActivity={handleDeleteActivity}
+          />
         ))}
       </List>
     </div>
