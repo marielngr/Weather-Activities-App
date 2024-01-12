@@ -1,6 +1,8 @@
 import Form from "./components/Form/Form.js";
 import { useState } from "react";
 import { uid } from "uid";
+import List from "./components/List/List.js";
+import ListItem from "./components/ListItem/ListItem.js";
 
 function App() {
   const [activities, setActivities] = useState([]);
@@ -19,6 +21,11 @@ function App() {
   return (
     <div className="App">
       <Form onAddActivity={handleAddActivity} />
+      <List>
+        {activities.map((activity) => (
+          <ListItem key={activity.id} newItem={activity.name} />
+        ))}
+      </List>
     </div>
   );
 }
