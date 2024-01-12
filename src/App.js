@@ -3,9 +3,12 @@ import { useState } from "react";
 import { uid } from "uid";
 import List from "./components/List/List.js";
 import ListItem from "./components/ListItem/ListItem.js";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useLocalStorageState("activities", {
+    defaultValue: [],
+  });
 
   function handleAddActivity(name, isWeatherChecked) {
     setActivities([
