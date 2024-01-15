@@ -21,6 +21,12 @@ function App() {
       setWeather(data);
     }
     fetchWeather();
+
+    const interval = setInterval(fetchWeather, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   function handleAddActivity(name, isWeatherChecked) {
