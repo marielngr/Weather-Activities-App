@@ -12,7 +12,7 @@ function App() {
   });
   const [weather, setWeather] = useState();
 
-  const weatherAppUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+  //const weatherAppUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
   useEffect(() => {
     async function fetchWeather() {
