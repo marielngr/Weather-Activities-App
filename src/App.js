@@ -44,6 +44,14 @@ function App() {
     setActivities(activities.filter((activity) => activity.id !== idToRemove));
   }
 
+  function handleSaveEditedActivity(id, newActivity) {
+    setActivities(
+      activities.map((activity) =>
+        activity.id === id ? { ...activity, name: newActivity } : activity
+      )
+    );
+  }
+
   if (!weather) {
     return null;
   }
@@ -69,6 +77,7 @@ function App() {
             key={activity.id}
             newItem={activity.name}
             onDeleteActivity={handleDeleteActivity}
+            onSaveEditedActivity={handleSaveEditedActivity}
           />
         ))}
       </List>
@@ -77,3 +86,15 @@ function App() {
 }
 
 export default App;
+
+// function handleSetNewHeightForTree(id, height) {
+
+//   setTrees(
+
+//     trees.map((tree) => {
+
+//       if (tree.id === id) return { ...tree, height };
+
+//       return tree;
+
+//     })
